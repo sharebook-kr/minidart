@@ -32,7 +32,10 @@ def get_raw_fs():
 
 
 if __name__ == "__main__":
-    key = ""
+    #key = ""
+    with open("../api.key") as f:
+        key = f.readlines()
+        print(key)
 
     # company basic information
     sec = get_comp_info(key)

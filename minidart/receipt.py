@@ -24,15 +24,19 @@ class Receipt:
     def get_year_fs_receipts(self):
         cond = self.data['rm'] == "연"
         df = self.data[cond]
-        asc_df = df[::-1]     # ascending order
-        asc_df['year'] = asc_df["report_nm"].str[-8:-4]    # year 
+        asc_df = df[::-1].copy()     # ascending order
+        asc_df['year'] = asc_df["report_nm"].str[-8:-4]   # year 
         data = asc_df[['year', 'rcept_no']]
         data.set_index('year', inplace=True)
         return data
 
 
 if __name__ == "__main__":
-    key = ""
+    #key = ""
+    with open("../api.key") as f:
+        key = f.readlines()
+        print(key)
+
     receipt = Receipt(key)
     df = receipt.get_year_fs_receipts()
     print(df)
